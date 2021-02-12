@@ -4,7 +4,7 @@ export const ADD_PRODUCT = "ADD_PRODUCT"
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS"
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
-
+export const SEARCH_PRODUCT = "SEARCH_PRODUCT"
 
 
 
@@ -115,6 +115,14 @@ export  const deleteProduct = (productId) => {
             productId:productId
         })
 
+    }
+
+}
+
+export const searchProduct=(title)=> {
+    return {
+        type:SEARCH_PRODUCT,
+        title:title
     }
 
 }

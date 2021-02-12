@@ -69,8 +69,6 @@ const AddProduct = () => {
       dispatchRedux(actions.updateProduct(productId,state.title,state.price,state.image,state.description)).then(() => {
         History.push('/')
       })
-
-      
      }
      else {
       dispatchRedux(actions.addProduct(state.title,state.price,state.image,state.description)).then(() => {

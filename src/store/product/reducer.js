@@ -1,5 +1,6 @@
+import { act } from "react-dom/test-utils";
 import Product from "../../models/Product";
-import { ADD_PRODUCT, DELETE_PRODUCT, FETCH_PRODUCTS, UPDATE_PRODUCT } from "./actions";
+import { ADD_PRODUCT, DELETE_PRODUCT, FETCH_PRODUCTS, SEARCH_PRODUCT, UPDATE_PRODUCT } from "./actions";
 
 const initialState = {
     products : []
@@ -47,10 +48,20 @@ export const productReducer = (state=initialState,action) => {
                products:updatePr
             }    
 
+        case SEARCH_PRODUCT:
+            const searchTitle = action.title
+           
+            const searchProducts = state.products.filter(p=>p.title===searchTitle)
+
+            return {
+                products :searchProducts
+
+            }    
+
             
         
 
-            
+
     
         default:
             return state;
