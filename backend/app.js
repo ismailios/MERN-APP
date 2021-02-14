@@ -6,6 +6,7 @@ const multer = require("multer");
 const path = require("path");
 const productRoutes = require("./routers/product");
 const userRoutes = require("./routers/user");
+const cors = require("cors");
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -39,6 +40,7 @@ app.all("*", (req, res, next) => {
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   next();
 });
+app.use(cors());
 
 //app.use(bodyParser.urlencoded({extended:false}))
 app.use(

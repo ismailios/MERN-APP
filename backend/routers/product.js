@@ -6,7 +6,7 @@ const router = express.Router();
 const productController = require("../controllers/product");
 const isAuth = require("../middleware/is-auth");
 
-router.get("/products", isAuth, productController.getProducts);
+router.get("/products/:page", productController.getProducts);
 router.post(
   "/product",
   [
@@ -32,6 +32,7 @@ router.put(
       .isLength({ min: 5 })
       .withMessage("The title must be more than 5 caractere"),
     body("price").isNumeric().withMessage("The price must be a number"),
+    body("image").notEmpty().withMessage("select a image"),
     body("description")
       .trim()
       .isLength({ min: 5 })

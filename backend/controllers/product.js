@@ -5,7 +5,7 @@ const User = require("../models/user");
 const { clearImage } = require("../util/file");
 
 exports.getProducts = (req, res, next) => {
-  let currentPage = 1;
+  const currentPage = req.params.page || 1;
   let perPage = 2;
   let totalItems;
 
@@ -13,8 +13,9 @@ exports.getProducts = (req, res, next) => {
     .countDocuments()
     .then((count) => {
       totalItems = count;
-      return Product.find();
-      //.skip((currentPage-1)*2).limit(perPage)
+      return Product.find()
+        .skip((currentPage - 1) * perPage)
+        .limit(perPage);
     })
     .then((products) => {
       if (!products) {
@@ -26,6 +27,9 @@ exports.getProducts = (req, res, next) => {
       res.status(200).json({
         message: "Product Loaded Successfully",
         totalProducts: totalItems,
+        currentPage: currentPage,
+        nbPages: Math.ceil(totalItems / perPage),
+        PerPage: perPage,
         products: products,
       });
     })
@@ -38,6 +42,11 @@ exports.getProducts = (req, res, next) => {
 };
 
 exports.addProduct = (req, res, next) => {
+  if (!req.file) {
+    const error = new Error("no file uploaded");
+    error.statusCode = 422;
+    throw error;
+  }
   const title = req.body.title;
   const price = req.body.price;
   //REPLACE JUST FOR WINDOWS
@@ -51,12 +60,6 @@ exports.addProduct = (req, res, next) => {
     const error = new Error("Validation Failed");
     error.statusCode = 422;
     error.data = errors.array();
-    throw error;
-  }
-
-  if (!req.file) {
-    const error = new Error("no file uploaded");
-    error.statusCode = 422;
     throw error;
   }
 
