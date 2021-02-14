@@ -26,8 +26,6 @@ const TryLogin = (props) => {
 
     const expiryTime = expirationDate.getTime() - new Date().getTime();
 
-    console.log(expiryTime);
-
     dispatch(actions.authenticate(userId, token, expiryTime));
   }, [dispatch]);
 

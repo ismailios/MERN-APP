@@ -1,0 +1,27 @@
+ul.container li {
+    margin: 10px 5px;
+}
+
+ul.container {
+    display: flex;
+    list-style-type: none;
+}
+ul.container li a{
+    background: #f8f9fa;
+    padding: 6px 14px;
+    border-radius: 6px;
+    color: mediumslateblue;
+}
+
+
+ul.container li a {
+    outline: 0;
+    border: 0;
+}
+ul.container li.active a, ul.container li a:hover   {
+    background-color: mediumslateblue;
+    color: #f8f9fa !important;
+}
+ul.container li.disabled a {
+  cursor: not-allowed;
+}

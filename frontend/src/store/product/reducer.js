@@ -12,6 +12,10 @@ import {
 const initialState = {
   products: [],
   filtred: [],
+  totalProducts: null,
+  currentPage: null,
+  nbPages: null,
+  PerPage: null,
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -32,6 +36,10 @@ export const productReducer = (state = initialState, action) => {
 
     case FETCH_PRODUCTS:
       return {
+        totalProducts: action.totalProducts,
+        currentPage: action.currentPage,
+        nbPages: action.nbPages,
+        PerPage: action.PerPage,
         products: action.products,
         filtred: action.filtred,
       };

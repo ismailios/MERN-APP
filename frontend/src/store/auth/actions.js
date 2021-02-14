@@ -7,7 +7,7 @@ export const AUTHENTICATE = "AUTHENTICATE";
 
 const formData = new FormData();
 
-const expirationDate = new Date(new Date().getTime() + parseInt(36 * 1000));
+const expirationDate = new Date(new Date().getTime() + parseInt(3600 * 1000));
 
 export const authenticate = (userId, token, expiryTime) => {
   return (dispatch) => {

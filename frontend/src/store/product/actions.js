@@ -6,21 +6,23 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const SEARCH_PRODUCT = "SEARCH_PRODUCT";
 
-export const fetchProdcuts = () => {
+export const fetchProducts = (page) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
 
-    const response = await fetch(BASE_URL + "products", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
+    const response = await fetch(BASE_URL + "products/" + page, {
       method: "GET",
     });
 
     const resData = await response.json();
+    console.log(resData);
 
     dispatch({
       type: FETCH_PRODUCTS,
+      totalProducts: resData.totalProducts,
+      currentPage: resData.currentPage,
+      nbPages: resData.nbPages,
+      PerPage: resData.PerPage,
       products: resData.products,
       filtred: resData.products,
     });
@@ -46,7 +48,7 @@ export const addProduct = (title, price, image, description) => {
       });
 
       if (!response.ok) {
-        throw new Error("Somethong went  !!!");
+        throw new Error("Something went  !!!");
       }
 
       const resData = await response.json();
